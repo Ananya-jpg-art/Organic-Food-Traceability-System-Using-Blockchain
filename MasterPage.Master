@@ -1,0 +1,345 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="Organic_food.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Organic Food Traceability System using Blockchain</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    
+    <style>
+        .body{
+            background-color: #CCFFCC;
+        }
+
+        .navbar {
+            background-color: #28a745; /* Green color */
+            padding: 10px 20px;
+        }
+
+        .navbar-brand img {
+            height: 50px;
+        }
+
+        .nav-link {
+            color: white !important;
+        }
+        .container-fluid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        /* Center the buttons and icons */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .nav-buttons a {
+            margin: 0 10px; /* Space between buttons */
+        }
+
+        .profile-logout-icons {
+            display: flex;
+            align-items: center;
+             font-size: 20px; /* Set icon height */
+            color: white; /* Default white */
+            margin-left: 50px;
+            margin-right: 10px;
+        }
+
+        /* Custom styling for buttons */
+        .btn-custom {
+            background-color: #2ecc71 !important; /* Lighter Green */
+            border: none;
+            padding: 8px 20px;
+            font-weight: bold;
+            color: white;
+            border-radius: 30px;
+            transition: 0.3s;
+            margin-left: 10px; /* Smaller gap */
+        }
+
+            /* Hover effect */
+            .btn-custom:hover {
+                background-color: #27ae60 !important; /* Darker Green */
+                transform: scale(1.05);
+            }
+
+        .carousel img {
+            height: 500px; /* Adjust height */
+            object-fit: cover; /* Ensures images cover the space nicely */
+        }
+
+        /* Make Bootstrap dropdown open on hover */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0; /* Removes gap */
+        }
+
+        /* Custom Dropdown Styling */
+        .custom-dropdown {
+            background-color: #CCFFCC; /* body background */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Soft shadow */
+            padding: 5px 0; /* Spacing inside dropdown */
+            margin-right:8px;
+            /*margin-left:0px;*/
+            min-width: 200px; /* Adjust width */
+             border: none; 
+        }
+
+        /* Dropdown Item Styling */
+        .custom-dropdown-item {
+             display: flex;
+            align-items: center;
+            padding: 10px 15px; /* Adjusted padding to remove extra left space */
+            font-size: 16px; /* Readable text */
+            font-weight: 500;
+            color: #333; /* Dark text for contrast */
+            transition: all 0.3s ease-in-out;
+            width: 100%; /* Ensure hover effect covers full width */
+            text-decoration: none; 
+        }
+
+            /* Dropdown Item Hover Effect */
+            .custom-dropdown-item:hover {
+                background-color: #28a745; /* Green hover */
+               width:93%;
+                color: white;
+                border-radius: 5px; /* Smooth edges on hover */
+            }
+
+            /* Add Icons Styling */
+            .custom-dropdown-item i {
+                color: #28a745; /* Green icon */
+            }
+
+            /* Change icon color on hover */
+            .custom-dropdown-item:hover i {
+                color: white;
+            }
+
+        /*.profile-icon, .logout-icon {
+            font-size: 30px;*/ /* Set icon height */
+            /*color: white;*/ /* Default white */
+            /*margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .logout-icon {
+            color: red;*/ /* Logout icon in red */
+        /*}*/
+
+    </style>
+
+    <script>
+        // Enable Bootstrap tooltips
+        document.addEventListener("DOMContentLoaded", function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
+    </script>
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+<body style="background-color: #CCFFCC;">
+    <form id="form1" runat="server">
+
+        <!-- Home Fixed Top Navigation Bar -->
+        <nav id="navhome" runat="server" class="navbar navbar-expand-lg navbar-dark fixed-top">
+
+            <div class="container-fluid">
+                <!-- Logo with title -->
+                <a class="navbar-brand d-flex align-items-center" href="Home.aspx">
+                    <img src="Images/organic.png" alt="Organic Food" class="me-2">
+                    <span class="text-white fw-bold fs-4" style="margin-left: 20px">Organic Food Traceability System</span>
+                </a>
+
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="btn btn-custom" href="Login.aspx">Log In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-custom" href="Register.aspx">Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <!-- Farmer Navigation Bar (Shown When Logged In) -->
+        <nav id="farmerNav" runat="server" class="navbar navbar-expand-lg navbar-dark fixed-top" visible="false">
+            <div class="container-fluid">
+                <!-- Logo and Title -->
+                <a class="navbar-brand d-flex align-items-center" href="Home.aspx">
+                    <img src="Images/organic.png" alt="Organic Food" class="me-2">
+                    <span class="text-white fw-bold fs-4">Organic Food Traceability System</span>
+                </a>
+
+                <!-- Navigation Links (Products, Orders, Change Password) -->
+                <div class="nav-buttons">
+                    <a class="btn btn-custom text-white" href="FarmProducts.aspx">Products</a>
+                    <%--<a class="btn btn-custom text-white" href="FarmProduceDetails.aspx">Produce Details</a>--%>
+                    <a class="btn btn-custom text-white" href="ManOrders.aspx">Orders</a>
+                    <a class="btn btn-custom text-white" href="ChangePassword.aspx">Change Password</a>
+                </div>
+
+                <!-- Profile & Logout Icons -->
+                <div class="profile-logout-icons">
+                    <a href="Profile.aspx" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile">
+                        <i class="fas fa-user-circle fa-2x text-white me-3"></i>
+                    </a>
+                    <a href="Home.aspx" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout">
+                        <i class="fas fa-sign-out-alt fa-2x text-danger"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Manufacture Navigation Bar (Shown When Logged In) -->
+        <nav id="ManufactureNav" runat="server" class="navbar navbar-expand-lg navbar-dark fixed-top" visible="false">
+            <div class="container-fluid">
+                <!-- Logo and Title -->
+                <a class="navbar-brand d-flex align-items-center" href="Home.aspx">
+                    <img src="Images/organic.png" alt="Organic Food" class="me-2">
+                    <span class="text-white fw-bold fs-4">Organic Food Traceability System</span>
+                </a>
+
+                <!-- Navigation Links (Products, Orders, Change Password) -->
+                <div class="nav-buttons d-flex align-items-center">                   
+                    <!-- Products Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-custom text-white dropdown-toggle" type="button" id="productsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Products
+                        </button>
+                        <ul class="dropdown-menu custom-dropdown" aria-labelledby="productsDropdown">
+                            <li><a class="dropdown-item custom-dropdown-item" href="ManProducts.aspx">My Products</a></li>
+                            <li><a class="dropdown-item custom-dropdown-item" href="ViewFarmProducts.aspx">Farmer Products</a></li>
+                        </ul>
+                    </div>
+                    <a class="btn btn-custom text-white" href="ManOrders.aspx">Entry Orders</a>
+                    <a class="btn btn-custom text-white" href="DistOrders.aspx">Exit Orders</a>
+                    <a class="btn btn-custom text-white" href="ChangePassword.aspx">Change Password</a>
+                </div>
+
+                <!-- Profile & Logout Icons -->
+                <div class="profile-logout-icons">
+                    <a href="Profile.aspx" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile">
+                        <i class="fas fa-user-circle fa-2x text-white me-3"></i>
+                    </a>
+                    <a href="Home.aspx" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout">
+                        <i class="fas fa-sign-out-alt fa-2x text-danger"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Distributor Navigation Bar (Shown When Logged In) -->
+        <nav id="DistributorNav" runat="server" class="navbar navbar-expand-lg navbar-dark fixed-top" visible="false">
+            <div class="container-fluid">
+                <!-- Logo and Title -->
+                <a class="navbar-brand d-flex align-items-center" href="Home.aspx">
+                    <img src="Images/organic.png" alt="Organic Food" class="me-2">
+                    <span class="text-white fw-bold fs-4">Organic Food Traceability System</span>
+                </a>
+
+                <!-- Navigation Links (Products, Orders, Change Password) -->
+                <div class="nav-buttons">
+                    <a class="btn btn-custom text-white" href="ViewManProducts.aspx">Products</a>
+                    <a class="btn btn-custom text-white" href="DistOrders.aspx">Entry Orders</a>
+                    <a class="btn btn-custom text-white" href="RC_Orders.aspx">Exit Orders</a>
+                    <a class="btn btn-custom text-white" href="ChangePassword.aspx">Change Password</a>
+                </div>
+
+                <!-- Profile & Logout Icons -->
+                <div class="profile-logout-icons">
+                    <a href="Profile.aspx" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile">
+                        <i class="fas fa-user-circle fa-2x text-white me-3"></i>
+                    </a>
+                    <a href="Home.aspx" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout">
+                        <i class="fas fa-sign-out-alt fa-2x text-danger"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Retailer/Customer Navigation Bar (Shown When Logged In) -->
+        <nav id="RetailerCustomerNav" runat="server" class="navbar navbar-expand-lg navbar-dark fixed-top" visible="false">
+            <div class="container-fluid">
+                <!-- Logo and Title -->
+                <a class="navbar-brand d-flex align-items-center" href="Home.aspx">
+                    <img src="Images/organic.png" alt="Organic Food" class="me-2">
+                    <span class="text-white fw-bold fs-4">Organic Food Traceability System</span>
+                </a>
+
+                <!-- Navigation Links (Products, Orders, Change Password) -->
+                <div class="nav-buttons">
+                    <a class="btn btn-custom text-white" href="ViewManProducts.aspx">Products</a>
+                    <a class="btn btn-custom text-white" href="RC_Orders.aspx">My Orders</a>
+                    <a class="btn btn-custom text-white" href="ChangePassword.aspx">Change Password</a>
+                </div>
+
+                <!-- Profile & Logout Icons -->
+                <div class="profile-logout-icons">
+                    <a href="Profile.aspx" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile">
+                        <i class="fas fa-user-circle fa-2x text-white me-3"></i>
+                    </a>
+                    <a href="Home.aspx" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout">
+                        <i class="fas fa-sign-out-alt fa-2x text-danger"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Customer Navigation Bar (Shown When Logged In) -->
+        <%--<nav id="CustomerNav" runat="server" class="navbar navbar-expand-lg navbar-dark fixed-top" visible="false">
+            <div class="container-fluid">
+                <!-- Logo and Title -->
+                <a class="navbar-brand d-flex align-items-center" href="Home.aspx">
+                    <img src="Images/organic.png" alt="Organic Food" class="me-2">
+                    <span class="text-white fw-bold fs-4">Organic Food Traceability System</span>
+                </a>
+
+                <!-- Navigation Links (Products, Orders, Change Password) -->
+                <div class="nav-buttons">
+                    <a class="btn btn-custom text-white" href="ManProducts.aspx">Products</a>
+                    <a class="btn btn-custom text-white" href="RC_Orders.aspx">My Orders</a>
+                    <a class="btn btn-custom text-white" href="ChangePassword.aspx">Change Password</a>
+                </div>
+
+                <!-- Profile & Logout Icons -->
+                <div class="profile-logout-icons">
+                    <a href="Profile.aspx" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile">
+                        <i class="fas fa-user-circle fa-2x text-white me-3"></i>
+                    </a>
+                    <a href="Home.aspx" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout">
+                        <i class="fas fa-sign-out-alt fa-2x text-danger"></i>
+                    </a>
+                </div>
+            </div>
+        </nav>--%>
+
+        <!-- Page Content -->
+        <div class="container mt-5 pt-5">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+        </div>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </form>
+</body>
+</html>
